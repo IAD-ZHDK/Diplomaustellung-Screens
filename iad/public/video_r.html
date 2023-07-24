@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/video.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js" integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>IAD Right Screen</title>
+</head>
+
+  <body>
+      <div class="container">
+        <div class="inner-container">
+          <video id="screen_r" class="video" muted autoplay loop >
+            <source id="source_r" src = "assets/videos_r/STANDBY_R.mp4" type="video/mp4">
+          </video>
+      </div>
+    </div>
+       
+
+  </body>
+  <script>
+    socket = io.connect('http://127.0.0.1:8080', { transports : ['websocket'] });  
+    socket.on('user',
+      function(data) {
+        console.log("videor" + data)
+        var getVideoR = document.getElementById("screen_r");
+        var getSourceR = document.getElementById("source_r");
+
+        var pathR = "assets/videos_r/" + data.sVideoR;
+        getSourceR.setAttribute("src", pathR);
+        getVideoR.load();
+
+    }
+ );
+
+</script>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/video.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js" integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>IAD Middle Screen</title>
+</head>
+
+  <body> 
+      <div class="container">
+        <div class="inner-container">
+
+          <video class="video" muted autoplay loop id="screen_m" >
+            <source src = "assets/videos_m/STANDBY_M.mp4" type="video/mp4" id="source_m">
+          </video>
+
+      </div>
+    </div>
+       
+
+  </body>
+  <script>
+    socket = io.connect('http://127.0.0.1:8080', { transports : ['websocket'] }); 
+    console.log(socket) 
+    socket.on('user',
+      function(data) {
+        console.log("videom" + data)
+        var getVideoM = document.getElementById("screen_m");
+        var getSourceM = document.getElementById("source_m");
+
+        var pathM = "assets/videos_m/" + data.sVideoM;
+        getSourceM.setAttribute("src", pathM);
+        getVideoM.load();
+    }
+ );
+
+</script>
+</html>

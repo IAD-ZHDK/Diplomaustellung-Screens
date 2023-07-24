@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/text.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js" integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>IAD Student Text</title>
+
+  </head>
+
+  <body>
+
+ 
+
+    <div class="container">
+        <div class="inner-container">
+            <div class="description" >
+                <h1 id="subtitle"></h1>
+                <h1 id ="project"></h1>
+            </div>
+            <div class = "logo-overlay">
+                <img src="assets/logo.png" alt="" />
+            </div>
+          </div>
+         
+    </div>
+         
+
+
+  </body>
+  <script>
+    socket = io.connect('http://127.0.0.1:8080', { transports : ['websocket'] });  
+    socket.on('user',
+      function(data) {
+        var getSubtitle = document.getElementById("subtitle");
+        var getProject = document.getElementById("project");
+
+        getSubtitle.innerHTML = data.sSubT;
+        getProject.innerHTML = data.sProject;
+
+    }
+ );
+
+</script>
+</html>
